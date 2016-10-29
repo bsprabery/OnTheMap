@@ -21,7 +21,7 @@ class StudentData: NSObject {
         let created: String?
         let firstName: String?
         let lastName: String?
-        let mediaURL: String
+        let mediaURL: String?
         let latitude: Double?
         let longitude: Double?
         let objectID: String?
@@ -31,7 +31,7 @@ class StudentData: NSObject {
             created = studentLocation[OTMClient.Constants.JSONResponseKeys.CreatedAt] as! String!
             firstName = studentLocation[OTMClient.Constants.JSONResponseKeys.FirstName] as! String!
             lastName = studentLocation[OTMClient.Constants.JSONResponseKeys.LastName] as! String!
-            mediaURL = studentLocation[OTMClient.Constants.JSONResponseKeys.MediaURL] as! String
+            mediaURL = studentLocation[OTMClient.Constants.JSONResponseKeys.MediaURL] as! String?
             latitude = studentLocation[OTMClient.Constants.JSONResponseKeys.Latitude] as! Double!
             longitude = studentLocation[OTMClient.Constants.JSONResponseKeys.Longitude] as! Double!
             objectID = studentLocation[OTMClient.Constants.JSONResponseKeys.ObjectID] as! String!

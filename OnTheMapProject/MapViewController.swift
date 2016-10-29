@@ -67,7 +67,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             let first = studentStruct.firstName!
             let last = studentStruct.lastName!
-            let mediaURL = studentStruct.mediaURL
+            let mediaURL = studentStruct.mediaURL!
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
@@ -105,8 +105,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
-            let url = URL(string: "\(view.annotation?.subtitle)")
-            app.open(url!, options: [:], completionHandler: nil)
+            if let url = URL(string: "\(view.annotation?.subtitle)") {
+                app.open(url, options: [:], completionHandler: nil)
+            } else {
+                // show them a message
+                print("\n\n==============\nURL isn't valid\n===================\n\n")
+            }
             
             
             /*            if let validURL: URL = url as! URL {
