@@ -8,25 +8,64 @@
 
 import UIKit
 
+// I followed a tutorial on using Reachability on YouTube at: https://www.youtube.com/watch?v=BlBhHgoW9wM
+/*
+let reachableWithWifi = "ReachableWithWifi"
+let notReachable = "NotReachable"
+let reachableWithWWAN = "ReachableWithWWAN"
+
+var reachability: Reachability?
+var reachabilityStatus = reachableWithWifi
+*/
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var internetReach: Reachability?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        /*
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.reachabilityChanged), name: NSNotification.Name.reachabilityChanged, object: nil)
+        
+        internetReach = Reachability.forInternetConnection()
+        internetReach?.startNotifier()
+        if internetReach != nil {
+            self.statusChangedWithReachability(currentReachabilityStatus: internetReach!)
+        }
+        */
         return true
     }
+    /*
+    func reachabilityChanged(notification: NSNotification) {
+        print("Reachability Status changed")
+        reachability = notification.object as? Reachability
+        self.statusChangedWithReachability(currentReachabilityStatus: reachability!)
+    }
 
+    func statusChangedWithReachability(currentReachabilityStatus: Reachability) {
+        var networkStatus: NetworkStatus = currentReachabilityStatus.currentReachabilityStatus()
+        var statusString: String = ""
+        
+        if networkStatus.rawValue == NotReachable.rawValue {
+            print("Network Not Reachable")
+            reachabilityStatus = notReachable
+        } else if networkStatus.rawValue == ReachableViaWiFi.rawValue {
+            print("Reachable with Wifi")
+            reachabilityStatus = reachableWithWifi
+        } else if networkStatus.rawValue == ReachableViaWWAN.rawValue {
+            print("Reachable with WWAN")
+            reachabilityStatus = reachableWithWWAN
+        }
+        
+        //print("StatusValue: \(networkStatus.rawValue)")
+    }
+    */
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -38,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.reachabilityChanged, object: nil)
     }
 
 
