@@ -37,6 +37,9 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
         self.geocoder?.geocodeAddressString(userLocation, completionHandler: { (placemarks, error) -> Void in
         
             if error != nil {
+                let alert = UIAlertController(title: "Alert", message: "Invalid location.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 print("There was an error geocoding the location.")
             }
         

@@ -45,8 +45,9 @@ class POSTLinkVC: UIViewController, UITextFieldDelegate {
         
 
     }
-  //Currently, this function is never getting called - unless the user hits the return key on the keyboard. Additionally, it doesn't cover the issue where you might type one letter and hit enter - would it cause the app to crash if it's not a valid url? I think handling the URL with canOpenURL further on down the line is the solution for that.
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         let defaultURLText: String = "https://www.udacity.com"
         let inputURLText: String? = urlTextField.text!
         let urlText = inputURLText ?? defaultURLText
@@ -62,9 +63,23 @@ class POSTLinkVC: UIViewController, UITextFieldDelegate {
     
     //submitButton
     @IBAction func postUserData(_ sender: AnyObject) {
+        
+        let defaultURLText: String = "https://www.udacity.com"
+        let inputURLText: String? = urlTextField.text!
+        let urlText = inputURLText ?? defaultURLText
+        
+        StudentData.getSharedInstance().setMediaURL(mediaURL: urlText)
         OTMClient.sharedInstance().getUserData()
+        segueToMap()
     }
     
+    func segueToMap() {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        
+//        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapViewController") 
+//        self.present(controller, animated: true, completion: nil)
+    }
     
 
 }

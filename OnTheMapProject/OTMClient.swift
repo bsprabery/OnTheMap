@@ -78,7 +78,7 @@ class OTMClient: NSObject {
                 print("Account Dictionary: \(accountDictionary)")
                 
                 let sessionID = sessionDictionary[Constants.JSONResponseKeys.SessionID]!
-                let uniqueKey = accountDictionary[Constants.JSONResponseKeys.UniqueKey]!
+                let uniqueKey = accountDictionary[Constants.JSONResponseKeys.AccountKey]!
                 
                 StudentData.getSharedInstance().setUniqueKey(key: uniqueKey as! String)
                 
@@ -284,6 +284,17 @@ class OTMClient: NSObject {
             let task = session.dataTask(with: request) {(data, response, error) in
                 
                 guard (error == nil) else {
+                    
+//                    var topController = UIApplication.shared.keyWindow!.rootViewController
+//                    while ((topController?.presentedViewController) != nil) {
+//                        topController = topController?.presentedViewController
+//                    }
+//                    topController?.presentViewController(alert, animated: true, completion: nil)
+//                    
+//                    let alert = UIAlertController(title: "Alert", message: "Username and password are required.", preferredStyle: UIAlertControllerStyle.alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//                    topController?.present(alert, animated: true, completion: nil)
+                    
                     print("There was an error with your post request.")
                     return
                 }
@@ -319,7 +330,7 @@ class OTMClient: NSObject {
 
 
     //DELETE POSTS BY COORDINATES
-    /*
+    
     func getUserObjectID(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> Void {
         let students = StudentData.getSharedInstance().getStudentArray()
         var usersObjectIDs = Set<String>()
@@ -356,22 +367,10 @@ class OTMClient: NSObject {
                     return
                 }
                 
-                /*let newData = data.subdata(in: 5..<(data.count))
-                 
-                 
-                 let parsedResult: [String: AnyObject]
-                 do {
-                 parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String: AnyObject]
-                 } catch {
-                 print("Could not parse the data as JSON: '\(data)'")
-                 print(NSString(data: data, encoding: String.Encoding.utf8.rawValue))
-                 return
-                 }
-                 */
                 print(NSString(data: data, encoding: String.Encoding.utf8.rawValue))
             }
             task.resume()
         }
     }
- */
+ 
 }

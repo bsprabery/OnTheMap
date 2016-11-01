@@ -30,13 +30,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func refreshButton(_ sender: AnyObject) {
         print("\n\n============\nRefreshing the map!\n============\n\n\n")
-        self.mapView.removeAnnotations(myAnnotations!)
-        myAnnotations = nil
-        OTMClient.sharedInstance().getStudentsLocations(completeLogin: self.setMapData)
+//        self.mapView.removeAnnotations(myAnnotations!)
+//        myAnnotations = nil
+//        OTMClient.sharedInstance().getStudentsLocations(completeLogin: self.setMapData)
  
-        //OTMClient.sharedInstance().getUserObjectID(latitude: 40.069035, longitude: -88.253433)
-        
-        print("Refresh Button Clicked")
+        OTMClient.sharedInstance().getUserObjectID(latitude: 40.069035, longitude: -88.253433)
+
     }
 
     @IBAction func signOutButton(_ sender: AnyObject) {
@@ -49,10 +48,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.present(controller, animated: true, completion: nil)
     }
     
-    func setDataAndRefresh() {
-        setMapData()
-        
-    }
+//    func setDataAndRefresh() {
+//        setMapData()
+//        
+//    }
     
     
     func setMapData(){
@@ -61,8 +60,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var annotations = [MKPointAnnotation]()
         
         for studentStruct in studentStructArray  {
-            let lat = CLLocationDegrees(studentStruct.latitude!)
-            let long = CLLocationDegrees(studentStruct.longitude!)
+
+//            guard let lat = studentStruct.latitude else {
+//                let lat = 0.0
+//                return
+//            }
+//            
+//            guard let long = studentStruct.longitude else {
+//                let long = 0.0
+//                return
+//            }
+            let lat = studentStruct.latitude!
+            let long = studentStruct.longitude!
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
             
             let first = studentStruct.firstName!
@@ -105,30 +114,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
-            if let url = URL(string: "\(view.annotation?.subtitle)") {
-                app.open(url, options: [:], completionHandler: nil)
+            if let subtitle = view.annotation?.subtitle!  {
+                if let url = URL(string: "\(subtitle)") {
+                    if app.canOpenURL(url) {
+                        app.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        print("show notificaiton that the url is invalid")
+                    }
+                } else {
+                    // show them a message
+                    print("\n\n==============\nURL isn't valid\n===================\n\n")
+                }
             } else {
-                // show them a message
-                print("\n\n==============\nURL isn't valid\n===================\n\n")
+                print("\n\n==============\nInvalid annotation\n===================\n\n")
             }
-            
-            
-            /*            if let validURL: URL = url as! URL {
-                app.open(validURL, options: [:], completionHandler: nil)
-            } else {
-                print("No URL found.")
-            }
-            
-            
-             if let toOpen = url {
-                let url = URL(string: toOpen)
-                app.open(url!, options: [:], completionHandler: nil)
-            } else {
-                print("No Url found")
-            }
-            */
         }
     }
-    
-
 }

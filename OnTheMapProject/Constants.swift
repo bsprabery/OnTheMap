@@ -28,7 +28,8 @@ extension OTMClient {
             static let MapString = "mapString"
             static let MediaURL = "mediaURL"
             static let ObjectID = "objectId"
-            static let UniqueKey = "key"
+            static let UniqueKey = "uniqueKey"
+            static let AccountKey = "key"
             static let UpdatedAt = "updatedAt"
             static let StudentDictionaries = "results"
             
