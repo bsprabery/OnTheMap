@@ -30,6 +30,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
 //MARK: Geocoding
     var geocoder: CLGeocoder?
     
+    //FindOnTheMap Button
     @IBAction func geocodeLocation(_ sender: AnyObject) {
     let userLocation = self.locationTextField.text!
         StudentData.getSharedInstance().setMapString(mapString: userLocation)
@@ -37,7 +38,7 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
         self.geocoder?.geocodeAddressString(userLocation, completionHandler: { (placemarks, error) -> Void in
         
             if error != nil {
-                let alert = UIAlertController(title: "Alert", message: "Invalid location.", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Alert", message: "No results found.", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 print("There was an error geocoding the location.")

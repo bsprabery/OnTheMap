@@ -14,10 +14,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +26,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextField.delegate = self
         
         loginButton.layer.cornerRadius = 5
+        
+        activityIndicator.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else if usernameTextField.text!.isEmpty == false && passwordTextField.text!.isEmpty == false {
-            //OTMClient.sharedInstance().getSessionID(username: (usernameTextField.text)!, password: (passwordTextField.text)!, callingViewController: self)
+          //  OTMClient.sharedInstance().getSessionID(username: (usernameTextField.text)!, password: (passwordTextField.text)!, callingViewController: self)
             OTMClient.sharedInstance().getSessionID(username: "brittany.sprabery@gmail.com", password: "pc5DPLrFheIYD%", callingViewController: self)
             loginButton.isEnabled = false
         }

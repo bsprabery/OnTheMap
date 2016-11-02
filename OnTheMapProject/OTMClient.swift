@@ -22,6 +22,8 @@ class OTMClient: NSObject {
     func getSessionID(username: String, password: String, callingViewController: LoginViewController) -> Void {
    
         if let url = URL(string: "https://www.udacity.com/api/session") {
+            callingViewController.activityIndicator.isHidden = false
+            callingViewController.activityIndicator.startAnimating()
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -34,11 +36,15 @@ class OTMClient: NSObject {
                 
                 guard let data = data else {
                     print("No data was returned by the request!")
+                    callingViewController.activityIndicator.isHidden = true
+                    callingViewController.activityIndicator.stopAnimating()
                     return
                 }
                 
                 guard (error == nil) else {
                     print("There was an error with your request: \(error).")
+                    callingViewController.activityIndicator.isHidden = true
+                    callingViewController.activityIndicator.stopAnimating()
                     return
                 }
                 
@@ -50,6 +56,9 @@ class OTMClient: NSObject {
                         let alert = UIAlertController(title: "Alert", message: "Username and/or password are incorrect.", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                         callingViewController.present(alert, animated: true, completion: nil)
+                        
+                        callingViewController.activityIndicator.isHidden = true
+                        callingViewController.activityIndicator.stopAnimating()
                     }
                     return
                 }
@@ -118,6 +127,18 @@ class OTMClient: NSObject {
                 do {
                     parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
                 } catch {
+                    
+                    var topController = UIApplication.shared.keyWindow!.rootViewController
+                    while ((topController?.presentedViewController) != nil) {
+                        topController = topController?.presentedViewController
+                    }
+                    
+                    let alert = UIAlertController(title: "Alert", message: "Unable to retrieve the map data at this time.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    topController?.present(alert, animated: true, completion: nil)
+                    
+                    topController?.present(alert, animated: true, completion: nil)
+                    
                     print("Could not parse the data as JSON: '\(data)'")
                     return
                 }
@@ -284,17 +305,7 @@ class OTMClient: NSObject {
             let task = session.dataTask(with: request) {(data, response, error) in
                 
                 guard (error == nil) else {
-                    
-//                    var topController = UIApplication.shared.keyWindow!.rootViewController
-//                    while ((topController?.presentedViewController) != nil) {
-//                        topController = topController?.presentedViewController
-//                    }
-//                    topController?.presentViewController(alert, animated: true, completion: nil)
-//                    
-//                    let alert = UIAlertController(title: "Alert", message: "Username and password are required.", preferredStyle: UIAlertControllerStyle.alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-//                    topController?.present(alert, animated: true, completion: nil)
-                    
+
                     print("There was an error with your post request.")
                     return
                 }
@@ -304,16 +315,34 @@ class OTMClient: NSObject {
                     return
                 }
                 
-                let newData = data.subdata(in: 5..<(data.count))
+                //let newData = data.subdata(in: 5..<(data.count))
                 
                 
                 let parsedResult: [String: AnyObject]
                 do {
-                    parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String: AnyObject]
+                    parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
                 } catch {
+                    DispatchQueue.main.async {
+
+                        var topController = UIApplication.shared.keyWindow!.rootViewController! as UIViewController
+                        while ((topController.presentedViewController) != nil) {
+                            topController = topController.presentedViewController!
+                        }
+                        
+                        let alert = UIAlertController(title: "Alert", message: "Unable to complete your request at this time.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        
+                        topController.present(alert, animated: true, completion: nil)
+                    }
+                    
                     print("Could not parse the data as JSON: '\(data)'")
                     return
                 }
+                
+                POSTLinkVC.getSharedInstance().segueToMapView()
+                
+                //let controller = POSTLinkVC.getSharedInstance().presentViewController(withIdentifier: "TabBarController") as UITabBarController
+                //POSTLinkVC.getSharedInstance().present(controller, animated: true, completion: nil)
                 
                 print(NSString(data: data, encoding: String.Encoding.utf8.rawValue))
             }
@@ -329,9 +358,9 @@ class OTMClient: NSObject {
     }
 
 
-    //DELETE POSTS BY COORDINATES
-    
-    func getUserObjectID(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> Void {
+    //DELETE POSTS BY COORDINATES/OBJECTID
+    /*
+    func findUserByCoord(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> Void {
         let students = StudentData.getSharedInstance().getStudentArray()
         var usersObjectIDs = Set<String>()
         
@@ -344,7 +373,6 @@ class OTMClient: NSObject {
         for userObjectID in usersObjectIDs {
             deleteUserByObjectID(objectID: userObjectID)
         }
-        print("The there are no userObjectIDs found. \(usersObjectIDs)")
     }
     
     func deleteUserByObjectID(objectID: String) {
@@ -372,5 +400,5 @@ class OTMClient: NSObject {
             task.resume()
         }
     }
- 
+    */
 }

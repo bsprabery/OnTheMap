@@ -70,11 +70,15 @@
                                 <frame key="frameInset" minX="83" minY="77" width="208" height="179"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3kb-RD-Zne">
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.96726423501968384" green="0.39644503593444824" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="0dL-7b-fJn" firstAttribute="leading" secondItem="Y6T-5a-Dha" secondAttribute="trailing" constant="28" id="0ti-3c-vgx"/>
                             <constraint firstItem="bga-DP-aP6" firstAttribute="leading" secondItem="dla-Gg-1dK" secondAttribute="leading" id="26T-k2-FpZ"/>
+                            <constraint firstItem="3kb-RD-Zne" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="35O-Z2-sCN"/>
                             <constraint firstItem="fSE-Qb-A9x" firstAttribute="top" secondItem="0dL-7b-fJn" secondAttribute="bottom" constant="93" id="4UW-aZ-5t7"/>
                             <constraint firstItem="Izq-LS-ko0" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="5aF-0O-cwD"/>
                             <constraint firstItem="0dL-7b-fJn" firstAttribute="trailing" secondItem="fSE-Qb-A9x" secondAttribute="trailing" id="6nm-yT-4J0"/>
@@ -89,6 +93,7 @@
                             <constraint firstItem="Izq-LS-ko0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="14" id="M9S-Cm-ysW"/>
                             <constraint firstItem="Izq-LS-ko0" firstAttribute="width" secondItem="dla-Gg-1dK" secondAttribute="width" id="S3V-sI-x64"/>
                             <constraint firstItem="0dL-7b-fJn" firstAttribute="top" secondItem="Y6T-5a-Dha" secondAttribute="top" id="VQK-Eg-NZT"/>
+                            <constraint firstItem="3kb-RD-Zne" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Whj-Sw-9DQ"/>
                             <constraint firstItem="Y6T-5a-Dha" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="14" id="aNN-h7-Ab1"/>
                             <constraint firstItem="D12-Zq-BFo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="14" id="b3L-9H-dw3"/>
                             <constraint firstItem="0dL-7b-fJn" firstAttribute="top" secondItem="D12-Zq-BFo" secondAttribute="bottom" constant="8" id="g57-WA-n0m"/>
@@ -103,6 +108,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="3kb-RD-Zne" id="mpr-DJ-M4v"/>
                         <outlet property="loginButton" destination="D12-Zq-BFo" id="400-5H-bnC"/>
                         <outlet property="passwordTextField" destination="Izq-LS-ko0" id="ViU-Bs-c1a"/>
                         <outlet property="usernameTextField" destination="bga-DP-aP6" id="Iuq-Ot-5XI"/>
@@ -205,16 +211,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fBN-ha-G1a">
-                                <frame key="frameInset" width="375" height="667"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fBN-ha-G1a">
                                 <connections>
                                     <outlet property="delegate" destination="g5d-t7-7aU" id="sqU-XJ-eiN"/>
                                 </connections>
                             </mapView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="m7b-aQ-UaW">
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="m7b-aQ-UaW" firstAttribute="centerY" secondItem="CMM-dZ-Z01" secondAttribute="centerY" id="VtF-oW-dpE"/>
+                            <constraint firstItem="m7b-aQ-UaW" firstAttribute="centerX" secondItem="CMM-dZ-Z01" secondAttribute="centerX" id="aM5-t8-k86"/>
                             <constraint firstItem="fBN-ha-G1a" firstAttribute="top" secondItem="CMM-dZ-Z01" secondAttribute="top" id="kwx-HM-6Qm"/>
+                            <constraint firstItem="fBN-ha-G1a" firstAttribute="top" secondItem="CMM-dZ-Z01" secondAttribute="top" id="mMw-0V-k8F"/>
                             <constraint firstAttribute="trailing" secondItem="fBN-ha-G1a" secondAttribute="trailing" id="obw-Vd-xti"/>
                             <constraint firstItem="fBN-ha-G1a" firstAttribute="leading" secondItem="CMM-dZ-Z01" secondAttribute="leading" id="sDN-xu-upN"/>
                             <constraint firstItem="S4g-tk-2Zh" firstAttribute="top" secondItem="fBN-ha-G1a" secondAttribute="bottom" id="vwF-WP-TEg"/>
@@ -245,6 +256,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="m7b-aQ-UaW" id="6Sb-0c-EED"/>
                         <outlet property="mapView" destination="fBN-ha-G1a" id="Sl1-HZ-1Os"/>
                     </connections>
                 </viewController>

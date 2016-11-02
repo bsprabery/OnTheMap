@@ -20,7 +20,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return shared
     }
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var mapView: MKMapView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        activityIndicator.isHidden = true
+        activityIndicator.stopAnimating()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +42,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func refreshButton(_ sender: AnyObject) {
-        print("\n\n============\nRefreshing the map!\n============\n\n\n")
-//        self.mapView.removeAnnotations(myAnnotations!)
-//        myAnnotations = nil
-//        OTMClient.sharedInstance().getStudentsLocations(completeLogin: self.setMapData)
- 
-        OTMClient.sharedInstance().getUserObjectID(latitude: 40.069035, longitude: -88.253433)
-
+        self.mapView.removeAnnotations(myAnnotations!)
+        myAnnotations = nil
+        OTMClient.sharedInstance().getStudentsLocations(completeLogin: self.setMapData)
+        
+        print("\n\n========\nRefreshing the map!\n=======\n\n\n")
+       // OTMClient.sharedInstance().findUserByCoord(latitude: 40.069035, longitude: -88.253433)
     }
+    
 
     @IBAction func signOutButton(_ sender: AnyObject) {
         OTMClient.sharedInstance().deleteSession()
@@ -48,14 +61,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.present(controller, animated: true, completion: nil)
     }
     
-//    func setDataAndRefresh() {
-//        setMapData()
-//        
-//    }
-    
-    
     func setMapData(){
-        print("\n\n============\nSetting the map data!\n============\n\n\n")
+       
+        
         let studentStructArray = StudentData.getSharedInstance().getStudentArray()
         var annotations = [MKPointAnnotation]()
         
@@ -88,6 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         DispatchQueue.main.async {
             self.mapView.addAnnotations(annotations)
         }
+        
         myAnnotations = annotations
     }
     
@@ -119,10 +128,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     if app.canOpenURL(url) {
                         app.open(url, options: [:], completionHandler: nil)
                     } else {
-                        print("show notificaiton that the url is invalid")
+                        print("\n\n=====\n URL is Invalid \n=====\n\n")
                     }
                 } else {
-                    // show them a message
                     print("\n\n==============\nURL isn't valid\n===================\n\n")
                 }
             } else {

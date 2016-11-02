@@ -12,6 +12,12 @@ import MapKit
 
 class POSTLinkVC: UIViewController, UITextFieldDelegate {
     
+    private static let sharedInstance = POSTLinkVC()
+    
+    static func getSharedInstance() -> POSTLinkVC {
+        return sharedInstance
+    }
+    
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var urlTextField: UITextField!
     @IBOutlet var submitButton: UIButton!
@@ -70,15 +76,11 @@ class POSTLinkVC: UIViewController, UITextFieldDelegate {
         
         StudentData.getSharedInstance().setMediaURL(mediaURL: urlText)
         OTMClient.sharedInstance().getUserData()
-        segueToMap()
+        
     }
     
-    func segueToMap() {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-        self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-        
-//        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapViewController") 
-//        self.present(controller, animated: true, completion: nil)
+    func segueToMapView() {
+        self.tabBarController?.selectedIndex = 1
     }
     
 
