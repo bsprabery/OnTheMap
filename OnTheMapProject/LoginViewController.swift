@@ -46,7 +46,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.present(alert, animated: true, completion: nil)
         } else if usernameTextField.text!.isEmpty == false && passwordTextField.text!.isEmpty == false {
             OTMClient.sharedInstance().getSessionID(username: (usernameTextField.text)!, password: (passwordTextField.text)!, callingViewController: self)
-           // OTMClient.sharedInstance().getSessionID(username: "brittany.sprabery@gmail.com", password: "pc5DPLrFheIYD%", callingViewController: self)
             loginButton.isEnabled = false
         }
     }
