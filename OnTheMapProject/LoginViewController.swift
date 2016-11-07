@@ -27,16 +27,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         loginButton.layer.cornerRadius = 5
         
+        activityIndicator.hidesWhenStopped = true
         activityIndicator.isHidden = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.actOnNotification), name: NSNotification.Name(rawValue: notificationKey), object: nil)
     }
     
+   
+    
     @IBAction func loginToUdacity(_ sender: AnyObject) {
-        
         if usernameTextField.text!.isEmpty == true && passwordTextField.text!.isEmpty == true {
             let alert = UIAlertController(title: "Alert", message: "Username and password are required.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -46,8 +45,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else if usernameTextField.text!.isEmpty == false && passwordTextField.text!.isEmpty == false {
-          //  OTMClient.sharedInstance().getSessionID(username: (usernameTextField.text)!, password: (passwordTextField.text)!, callingViewController: self)
-            OTMClient.sharedInstance().getSessionID(username: "brittany.sprabery@gmail.com", password: "pc5DPLrFheIYD%", callingViewController: self)
+            OTMClient.sharedInstance().getSessionID(username: (usernameTextField.text)!, password: (passwordTextField.text)!, callingViewController: self)
+           // OTMClient.sharedInstance().getSessionID(username: "brittany.sprabery@gmail.com", password: "pc5DPLrFheIYD%", callingViewController: self)
             loginButton.isEnabled = false
         }
     }
@@ -63,12 +62,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func completeLogin() {
-        performUIUpdatesOnMain {
-            let controller = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-            self.present(controller, animated: true, completion: nil)
-            
-        }
+    func completion() {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        self.present(controller, animated: true, completion: nil)
     }
 
     @IBAction func signUp(_ sender: AnyObject) {
@@ -86,7 +82,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-
-
+    func actOnNotification() {
+        self.activityIndicator.isHidden = true
+    }
 }
 

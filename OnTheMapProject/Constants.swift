@@ -16,10 +16,10 @@ extension OTMClient {
         static let ParseApplicationID: String = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let RestAPIKey: String = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
         
-        
+        //Student Data:
         struct JSONResponseKeys {
             
-           //Student Locations:
+            //getStudents Response:
             static let CreatedAt = "createdAt"
             static let FirstName = "firstName"
             static let LastName = "lastName"
@@ -33,17 +33,16 @@ extension OTMClient {
             static let UpdatedAt = "updatedAt"
             static let StudentDictionaries = "results"
             
-            //Session:
+            //SessionID Response:
             static let CurrentTime = "current_time"
             static let AccountDictionary = "account"
-            //static let Account = "account"
             static let SessionDictionary = "session"
             static let Expiration = "expiration"
             static let SessionID = "id"
         }
 
+        //User Data:
         struct UserResponseKeys {
-            //User Data:
             static let UserLastName = "last_name"
             static let SocialAccounts = "social_accounts"
             static let FacebookID = "facebook_id"

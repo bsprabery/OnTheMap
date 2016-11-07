@@ -16,7 +16,9 @@ class StudentData: NSObject {
     static func getSharedInstance() -> StudentData {
         return sharedInstance
     }
-   
+    
+    //Declares and Initializes Student Structs
+    
     public struct StudentStruct {
         let created: String?
         let firstName: String?
@@ -82,8 +84,11 @@ class StudentData: NSObject {
         mediaURL = String()
     }
     
+    //Declares Array of Structs and Stores Student Data
+    
     private var studentArray: [StudentStruct]
     
+    //This array is created in the getStudents func in OTMClient
     func setStudentArray(studentArray: Array<StudentStruct>) -> Void {
         self.studentArray = studentArray
     }
@@ -93,7 +98,7 @@ class StudentData: NSObject {
     }
     
     
-    //MARK: User Data
+    //User Data
     
     private var mapCoordinates: CLLocationCoordinate2D
     private var mapString: String

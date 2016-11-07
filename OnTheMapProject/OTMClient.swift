@@ -249,7 +249,6 @@ class OTMClient: NSObject {
         }
     }
 
-    func getUserData() {
         if let url = URL(string: "https://www.udacity.com/api/users/\(StudentData.getSharedInstance().getUniqueKey())") {
             var request = URLRequest(url: url)
             let session = URLSession.shared
@@ -286,13 +285,11 @@ class OTMClient: NSObject {
                 StudentData.getSharedInstance().setFirstName(firstName: firstName as! String)
                 StudentData.getSharedInstance().setLastName(lastName: lastName as! String)
                 
-                self.postStudentLocation(uniqueKey: StudentData.getSharedInstance().getUniqueKey(), locationData: StudentData.getSharedInstance().getMapString(), firstName: firstName as! String, lastName: lastName as! String, latitude: StudentData.getSharedInstance().getCoordinates().latitude, longitude: StudentData.getSharedInstance().getCoordinates().longitude, urlData: StudentData.getSharedInstance().getMediaURL())
             }
             task.resume()
         }
     }
 
-    func postStudentLocation(uniqueKey: String, locationData: String, firstName: String, lastName: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, urlData: String) {
         if let url = URL(string: "https://parse.udacity.com/parse/classes/StudentLocation") {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
@@ -339,10 +336,6 @@ class OTMClient: NSObject {
                     return
                 }
                 
-                POSTLinkVC.getSharedInstance().segueToMapView()
-                
-                //let controller = POSTLinkVC.getSharedInstance().presentViewController(withIdentifier: "TabBarController") as UITabBarController
-                //POSTLinkVC.getSharedInstance().present(controller, animated: true, completion: nil)
                 
                 print(NSString(data: data, encoding: String.Encoding.utf8.rawValue))
             }
@@ -359,7 +352,6 @@ class OTMClient: NSObject {
 
 
     //DELETE POSTS BY COORDINATES/OBJECTID
-    /*
     func findUserByCoord(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> Void {
         let students = StudentData.getSharedInstance().getStudentArray()
         var usersObjectIDs = Set<String>()

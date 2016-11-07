@@ -12,16 +12,26 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    private var myAnnotations: [MKAnnotation]? = nil
-    
-    private static let shared = MapViewController()
-    
-    static func getMapVCShared() -> MapViewController {
-        return shared
-    }
-    
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var mapView: MKMapView!
+    
+    @IBAction func signOutButton(_ sender: AnyObject) {
+        OTMClient.sharedInstance().deleteSession()
+        
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func refreshButton(_ sender: AnyObject) {
+        OTMClient.sharedInstance().getStudents(completion: self.setMapData)
+        
+        print("\n\n========\nRefreshing the map!\n=======\n\n\n")
+    }
+    
+    @IBAction func unwindToMap(_ segue: UIStoryboardSegue) {
+        setMapData()
+        print("Segue is being performed.")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -37,51 +47,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setMapData()
     }
     
-    @IBAction func refreshButton(_ sender: AnyObject) {
-        self.mapView.removeAnnotations(myAnnotations!)
-        myAnnotations = nil
-        OTMClient.sharedInstance().getStudentsLocations(completeLogin: self.setMapData)
-        
-        print("\n\n========\nRefreshing the map!\n=======\n\n\n")
-       // OTMClient.sharedInstance().findUserByCoord(latitude: 40.069035, longitude: -88.253433)
-    }
-    
-
-    @IBAction func signOutButton(_ sender: AnyObject) {
-        OTMClient.sharedInstance().deleteSession()
-        completeLogout()
-    }
-    
-    func completeLogout() {
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(controller, animated: true, completion: nil)
-    }
-    
     func setMapData(){
-       
+        self.mapView.removeAnnotations(self.mapView.annotations)
         
         let studentStructArray = StudentData.getSharedInstance().getStudentArray()
         var annotations = [MKPointAnnotation]()
         
         for studentStruct in studentStructArray  {
 
-//            guard let lat = studentStruct.latitude else {
-//                let lat = 0.0
-//                return
-//            }
-//            
-//            guard let long = studentStruct.longitude else {
-//                let long = 0.0
-//                return
-//            }
             let lat = studentStruct.latitude!
             let long = studentStruct.longitude!
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
             let first = studentStruct.firstName!
             let last = studentStruct.lastName!
             let mediaURL = studentStruct.mediaURL!
@@ -90,20 +69,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotation.coordinate = coordinate
             annotation.title = "\(first) \(last)"
             annotation.subtitle = mediaURL
-            
             annotations.append(annotation)
-       }
+        }
         DispatchQueue.main.async {
             self.mapView.addAnnotations(annotations)
         }
-        
-        myAnnotations = annotations
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) ->MKAnnotationView? {
-        
         let reuseId = "pin"
-        
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         
         if pinView == nil {
@@ -114,13 +88,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         } else {
             pinView!.annotation = annotation
         }
-        
         return pinView
-        
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let subtitle = view.annotation?.subtitle!  {
@@ -128,10 +99,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     if app.canOpenURL(url) {
                         app.open(url, options: [:], completionHandler: nil)
                     } else {
+                        let alert = UIAlertController(title: "Alert", message: "The website cannot be reached.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
                         print("\n\n=====\n URL is Invalid \n=====\n\n")
                     }
                 } else {
-                    print("\n\n==============\nURL isn't valid\n===================\n\n")
+                    print("\n\n==============\nNo URL Provided\n===================\n\n")
                 }
             } else {
                 print("\n\n==============\nInvalid annotation\n===================\n\n")

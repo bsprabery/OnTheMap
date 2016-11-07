@@ -29,7 +29,7 @@
                                     <action selector="loginToUdacity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z7i-My-Hi2"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bga-DP-aP6">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bga-DP-aP6">
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -37,7 +37,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Izq-LS-ko0">
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dla-Gg-1dK">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -61,11 +61,6 @@
                                     <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fOv-Jx-DFP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSE-Qb-A9x">
-                                <state key="normal" title="Log in with Facebook">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="udacityLogo" translatesAutoresizingMaskIntoConstraints="NO" id="MVg-9o-mrO">
                                 <frame key="frameInset" minX="83" minY="77" width="208" height="179"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -79,10 +74,7 @@
                             <constraint firstItem="0dL-7b-fJn" firstAttribute="leading" secondItem="Y6T-5a-Dha" secondAttribute="trailing" constant="28" id="0ti-3c-vgx"/>
                             <constraint firstItem="bga-DP-aP6" firstAttribute="leading" secondItem="dla-Gg-1dK" secondAttribute="leading" id="26T-k2-FpZ"/>
                             <constraint firstItem="3kb-RD-Zne" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="35O-Z2-sCN"/>
-                            <constraint firstItem="fSE-Qb-A9x" firstAttribute="top" secondItem="0dL-7b-fJn" secondAttribute="bottom" constant="93" id="4UW-aZ-5t7"/>
                             <constraint firstItem="Izq-LS-ko0" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="5aF-0O-cwD"/>
-                            <constraint firstItem="0dL-7b-fJn" firstAttribute="trailing" secondItem="fSE-Qb-A9x" secondAttribute="trailing" id="6nm-yT-4J0"/>
-                            <constraint firstItem="fSE-Qb-A9x" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="14" id="9ZZ-Uk-t2y"/>
                             <constraint firstAttribute="bottom" secondItem="0dL-7b-fJn" secondAttribute="bottom" constant="206" id="Ask-Af-34e"/>
                             <constraint firstItem="dla-Gg-1dK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="DDb-ui-n6m"/>
                             <constraint firstItem="bga-DP-aP6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="DU3-dK-qi0"/>
@@ -118,7 +110,7 @@
             </objects>
             <point key="canvasLocation" x="-2514" y="-143"/>
         </scene>
-        <!--List View Controller-->
+        <!--On The Map-->
         <scene sceneID="UNt-CE-Mbb">
             <objects>
                 <viewController id="zs4-5G-Pt4" customClass="ListViewController" customModule="OnTheMapProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -137,7 +129,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XcI-Uw-DfL" id="PIn-eZ-Tao">
-                                            <frame key="frameInset" width="375" height="47"/>
+                                            <frame key="frameInset" width="375" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="aqD-NC-feW">
@@ -165,8 +157,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="jtC-Ek-bmb">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="jtC-Ek-bmb">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="hqt-mu-O6e">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yhs-Kn-84O">
                                 <rect key="frame" x="16" y="7" width="83" height="30"/>
@@ -199,7 +190,7 @@
             </objects>
             <point key="canvasLocation" x="158" y="184"/>
         </scene>
-        <!--Map View Controller-->
+        <!--On The Map-->
         <scene sceneID="GE5-T4-Jlw">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="g5d-t7-7aU" customClass="MapViewController" customModule="OnTheMapProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -211,7 +202,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fBN-ha-G1a">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="MapViewController" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fBN-ha-G1a">
                                 <connections>
                                     <outlet property="delegate" destination="g5d-t7-7aU" id="sqU-XJ-eiN"/>
                                 </connections>
@@ -231,7 +222,7 @@
                             <constraint firstItem="S4g-tk-2Zh" firstAttribute="top" secondItem="fBN-ha-G1a" secondAttribute="bottom" id="vwF-WP-TEg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8Si-Zz-V3x">
+                    <navigationItem key="navigationItem" title="On The Map" id="8Si-Zz-V3x">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="eaC-84-6Q4">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QNt-NA-rS6">
                                 <rect key="frame" x="16" y="7" width="83" height="30"/>
@@ -262,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wl-QI-kKx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="158" y="-472"/>
+            <point key="canvasLocation" x="157.59999999999999" y="-472.71364317841085"/>
         </scene>
         <!--POSTViewController-->
         <scene sceneID="1tQ-5F-PUC">
@@ -283,7 +274,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0D-9w-1mJ">
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -319,6 +310,10 @@ today?</string>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6IM-YE-dNr">
+                                <frame key="frameInset" minX="169" minY="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -334,13 +329,15 @@ today?</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="6IM-YE-dNr" id="IEJ-hB-ruM"/>
                         <outlet property="locationTextField" destination="Tke-u3-vSr" id="QEA-lk-1F4"/>
                         <outlet property="postButton" destination="k0D-9w-1mJ" id="bCJ-De-RbB"/>
+                        <segue destination="T7u-j9-vhB" kind="show" identifier="SegueToPOST" id="5ee-tn-cuq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFZ-Cr-jtb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079" y="-196"/>
+            <point key="canvasLocation" x="1018" y="-189"/>
         </scene>
         <!--POSTLinkVC-->
         <scene sceneID="GT9-bi-igO">
@@ -362,7 +359,7 @@ today?</string>
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sav-wW-bCX">
                                 <frame key="frameInset" minY="8" height="44"/>
@@ -377,7 +374,7 @@ today?</string>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78o-Qd-xyP">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78o-Qd-xyP">
                                 <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="1h4-WV-iHU"/>
@@ -388,10 +385,14 @@ today?</string>
                                     <action selector="postUserData:" destination="T7u-j9-vhB" eventType="touchUpInside" id="FI0-ql-ro3"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Bmq-BR-oku">
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fSZ-qe-gph" firstAttribute="trailing" secondItem="LUG-DI-pvN" secondAttribute="trailing" id="0PV-iW-QWm"/>
+                            <constraint firstItem="Bmq-BR-oku" firstAttribute="centerX" secondItem="0QJ-lI-Zdp" secondAttribute="centerX" id="Da4-GE-4EX"/>
                             <constraint firstItem="LUG-DI-pvN" firstAttribute="bottom" secondItem="NnO-wc-gwm" secondAttribute="top" id="FXw-3S-94E"/>
                             <constraint firstItem="LUG-DI-pvN" firstAttribute="top" secondItem="hcw-av-1ik" secondAttribute="bottom" constant="212" id="MjL-VV-0PV"/>
                             <constraint firstItem="fSZ-qe-gph" firstAttribute="leading" secondItem="0QJ-lI-Zdp" secondAttribute="leading" id="VCC-CW-nIz"/>
@@ -399,18 +400,22 @@ today?</string>
                             <constraint firstItem="NnO-wc-gwm" firstAttribute="top" secondItem="78o-Qd-xyP" secondAttribute="bottom" constant="69" id="hT8-CX-6tO"/>
                             <constraint firstItem="fSZ-qe-gph" firstAttribute="leading" secondItem="LUG-DI-pvN" secondAttribute="leading" id="mkk-4z-gW5"/>
                             <constraint firstItem="fSZ-qe-gph" firstAttribute="top" secondItem="hcw-av-1ik" secondAttribute="bottom" constant="32" id="pCw-My-EdA"/>
+                            <constraint firstAttribute="bottom" secondItem="Bmq-BR-oku" secondAttribute="bottom" constant="266" id="ufW-FK-dCd"/>
                             <constraint firstItem="fSZ-qe-gph" firstAttribute="centerX" secondItem="78o-Qd-xyP" secondAttribute="centerX" id="w2E-Be-Pje"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Bmq-BR-oku" id="LdA-1y-FF6"/>
                         <outlet property="mapView" destination="LUG-DI-pvN" id="dB2-Pz-FW6"/>
                         <outlet property="submitButton" destination="78o-Qd-xyP" id="rtv-9r-i1r"/>
                         <outlet property="urlTextField" destination="fSZ-qe-gph" id="6Nw-uD-lIy"/>
+                        <segue destination="iL2-fj-NKG" kind="unwind" identifier="unwindToMapSegue" unwindAction="unwindToMap:" id="IJA-7A-bZe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VPU-5G-deL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="iL2-fj-NKG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1861.5999999999999" y="-196.55172413793105"/>
+            <point key="canvasLocation" x="1873" y="-197"/>
         </scene>
         <!--TabBarController-->
         <scene sceneID="Af4-oY-O9K">
@@ -476,6 +481,6 @@ today?</string>
         <image name="udacityLogo" width="80" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b2w-NG-LF1"/>
+        <segue reference="5OG-Ro-9HU"/>
     </inferredMetricsTieBreakers>
 </document>
