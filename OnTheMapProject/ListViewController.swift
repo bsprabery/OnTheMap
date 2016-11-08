@@ -34,9 +34,8 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func signOutButton(_ sender: AnyObject) {
         OTMClient.sharedInstance().deleteSession()
-
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(controller, animated: true, completion: nil)
+        
+        self.dismiss(animated: true, completion: {})
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

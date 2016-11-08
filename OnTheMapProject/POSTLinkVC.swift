@@ -28,6 +28,9 @@ class POSTLinkVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
         activityIndicator.hidesWhenStopped = true
         self.urlTextField.delegate = self
         self.mapView.delegate = self
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(POSTLinkVC.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
@@ -65,6 +68,10 @@ class POSTLinkVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
 
         textField.resignFirstResponder()
         return true
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func submitUserData() {

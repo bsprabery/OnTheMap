@@ -23,6 +23,12 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
         self.locationTextField.delegate = self
         self.geocoder = CLGeocoder()
         activityIndicator.hidesWhenStopped = true
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(POSTViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(POSTViewController.keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(POSTViewController.keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     @IBAction func cancelButton(_ sender: AnyObject) {
@@ -44,12 +50,19 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
     }
     
     func submitUserLocation() {
-        activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
         let userLocation = self.locationTextField.text!
         StudentData.getSharedInstance().setMapString(mapString: userLocation)
         
         self.geocoder?.geocodeAddressString(userLocation, completionHandler: { (placemarks, error) -> Void in
             if error != nil {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidesWhenStopped = true
+                }
+                
                 let alert = UIAlertController(title: "Alert", message: "No results found.", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -64,5 +77,28 @@ class POSTViewController: UIViewController, UITextFieldDelegate {
             self.performSegue(withIdentifier: "SegueToPOST", sender: self)
         })
     }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if locationTextField.isFirstResponder == true {
+            self.view.frame.origin.y = -getKeyboardHeight(notification: notification)
+        } else {}
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if locationTextField.isFirstResponder == true {
+            view.frame.origin.y = 0
+        } else {}
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.cgRectValue.height
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+
 
 }

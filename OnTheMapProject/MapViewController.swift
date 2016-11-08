@@ -17,9 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func signOutButton(_ sender: AnyObject) {
         OTMClient.sharedInstance().deleteSession()
-        
-        let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.present(controller, animated: true, completion: nil)
+
+        self.dismiss(animated: true, completion: {})
     }
     
     @IBAction func refreshButton(_ sender: AnyObject) {
@@ -30,24 +29,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func unwindToMap(_ segue: UIStoryboardSegue) {
         setMapData()
+        activityIndicator.stopAnimating()
         print("Segue is being performed.")
     }
+        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setMapData()
+    }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        activityIndicator.isHidden = true
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         activityIndicator.stopAnimating()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setMapData()
+        activityIndicator.hidesWhenStopped = true
     }
     
     func setMapData(){

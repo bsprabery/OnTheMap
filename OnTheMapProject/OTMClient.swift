@@ -47,6 +47,7 @@ class OTMClient: NSObject {
                     DispatchQueue.main.async {
                         self.appDelegate.alertView(errorMessage: "OnTheMap is experiencing technical difficulties. Please try again later.", viewController: callingViewController)
                         hideActivityIndicator()
+                        callingViewController.loginButton.isEnabled = true
                     }
                     
                     print("No data was returned by the request!")
@@ -58,6 +59,7 @@ class OTMClient: NSObject {
                     DispatchQueue.main.async {
                         self.appDelegate.alertView(errorMessage: "OnTheMap is experiencing technical difficulties. Please try again later.", viewController: callingViewController)
                         hideActivityIndicator()
+                        callingViewController.loginButton.isEnabled = true
                     }
                     
                     print("There was an error with your request: \(error).")
@@ -72,6 +74,7 @@ class OTMClient: NSObject {
                     DispatchQueue.main.async {
                         self.appDelegate.alertView(errorMessage: "Username and/or password are incorrect.", viewController: callingViewController)
                         hideActivityIndicator()
+                        callingViewController.loginButton.isEnabled = true
                     }
                     return
                 }
